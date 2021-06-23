@@ -19,6 +19,7 @@ Page({
     reuqestNumber: 10,
     hideFlag: true, //true-隐藏  false-显示
     animationData: {}, //
+    rightFlag: false,
   },
 
   // 点击音标播放声音
@@ -94,6 +95,7 @@ Page({
       waittingnode: waittingnode,
       answerbtn: "clickAnswer",
       learnCountIcon: learnCountIcon,
+      rightFlag: false,
     });
     this.symbol_play();
   },
@@ -119,6 +121,7 @@ Page({
           // 让按钮不可以点击,防止多次触发
           this.setData({
             answerbtn: "",
+            rightFlag: true,
           });
           // 弹出下拉框
           this.showModal();

@@ -56,8 +56,8 @@
                 </button>
             </view>
             <!-- 下拉框滑出 -->
-            <view class="operation-item up">
-                <button size="mini" class="upBtn">
+            <view class="operation-item up" style="{{rightFlag? '':'display:none'}}">
+                <button size="mini" class="upBtn" bindtap="showModal">
                     <span class="iconfont icon-direction-up"></span>
                 </button>
             </view>
@@ -74,6 +74,13 @@
         <view class="modal-cancel" bindtap="hideModal"></view>
         <view class="bottom-dialog-body bottom-positon" animation="{{animationData}}">
             <!--  -->
+            <view class="word-text">
+                <text>{{current_word.word}}</text>
+                <button class="soundBtn" bindtap='symbol_play'>
+                    <span class="iconfont icon-sound"></span>
+                    <text>{{current_word.symbols}}</text>
+                </button>
+            </view>
             <view class="Mselect">
                 <view>
                     <text>例  句\n</text>
@@ -94,7 +101,7 @@
                 </view>
             </view> -->
             <view class='Mcancel' bindtap='mCancel'>
-                <text>取消</text>
+                <text>下一单词</text>
             </view>
         </view>
     </view>

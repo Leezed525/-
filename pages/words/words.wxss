@@ -128,7 +128,7 @@
 }
 
 .back {
-  /* float: left; */
+  float: left;
   width: 15%;
 }
 
@@ -168,7 +168,7 @@
 }
 
 .delete {
-  /* float: right; */
+  float: right;
   width: 15%;
 }
 
