@@ -37,7 +37,7 @@ Page({
       console.log(res.errMsg);
       console.log(res.errCode);
     });
-    // innerAudioContext.play();
+    innerAudioContext.play();
   },
 
   //向服务器获取选项数据
