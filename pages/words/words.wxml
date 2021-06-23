@@ -84,14 +84,12 @@
             <view class="Mselect">
                 <view>
                     <text>例  句\n</text>
-                    <button size="mini" class="soundBtn">
+                    <button size="mini" class="soundBtn" bindtap="playex">
                         <span class="iconfont icon-sound"></span>
                     </button>
                     <view class="liju">
-                        <text>
-                            "Many patients are not getting the medical treatment they need."
-                        </text>
-                        <text class="tran">\n很多病人没有得到他们需要的医治。</text>
+                        <text>{{current_word.ex}}</text>
+                        <text class="tran">\n{{current_word.tran}}</text>
                     </view>
                 </view>
             </view>

@@ -39,6 +39,22 @@ Page({
     });
     innerAudioContext.play();
   },
+  playex() {
+    const innerAudioContext = wx.createInnerAudioContext();
+    var url =
+      "https://fanyi.baidu.com/gettts?lan=uk&text=" +
+      this.data.current_word.ex +
+      "&spd=3&source=web";
+    innerAudioContext.src = url;
+    innerAudioContext.onPlay(() => {
+      console.log("开始播放");
+    });
+    innerAudioContext.onError((res) => {
+      console.log(res.errMsg);
+      console.log(res.errCode);
+    });
+    innerAudioContext.play();
+  },
 
   //向服务器获取选项数据
   getOptions: function (word) {
