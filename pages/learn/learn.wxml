@@ -1,0 +1,28 @@
+<view class="bodystyle">
+    <view class="content">
+        <view class="sentence">
+            <text class="sentence_content">{{content}}</text>
+            <text>\n{{note}}</text>
+        </view>
+        <view class="sign">
+            <button class="btn btn_qiandao">
+                <view>
+                    <span class="iconfont icon-qiandao"></span>
+                    <text>\n签到</text>
+                </view>
+            </button>
+        </view>
+    </view>
+    <view class="operations">
+        <view class="operation_item">
+            <button class="operation_item_btn btn" bindtap="learnBtn">
+                <text>learn</text>
+            </button>
+        </view>
+        <view class="operation_item">
+            <button class="operation_item_btn btn">
+                <text>review</text>
+            </button>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "wux-white-space": "../../dist/white-space/index",
+    "wux-button": "../../dist/button/index",
+    "wux-progress": "../../dist/progress/index",
+    "wux-card": "../../dist/card/index",
+    "wux-wing-blank": "../../dist/wing-blank/index",
+    "wux-divider": "../../dist/divider/index",
+    "wux-icon": "../../dist/icon/index"
+  }
+}

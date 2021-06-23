@@ -1,0 +1,9 @@
+/* pages/index4/about.wxss */
+
+/* page {
+  background-color: #D9C9BA;
+} */
+
+.bubble {
+  background-color: #D9C9BA;
+}

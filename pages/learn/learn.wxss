@@ -1,0 +1,69 @@
+/* page {
+  background: url("https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fd.paper.i4.cn%2Fmax%2F2014%2F08%2F26%2F1457360696765.jpg&refer=http%3A%2F%2Fd.paper.i4.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1626084139&t=ddc2b3462281751f0cae004cd560212f");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+} */
+
+.bodystyle {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: url("https://www.hualigs.cn/image/60c600e438495.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
+
+.content {
+  opacity: unset;
+  text-align: center;
+  width: 100%;
+  height: 75%;
+  background: transparent;
+}
+
+.sentence {
+  width: 100%;
+  /* background: #000; */
+  color: #000;
+}
+
+.sentence_content {
+  font-size: 50rpx;
+}
+.btn {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn_qiandao {
+  width: 28%;
+  height: 20%;
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+}
+.btn view span {
+  font-size: 40rpx;
+}
+.operations {
+  height: 25%;
+  width: 100%;
+  padding: 20rpx;
+}
+.operation_item {
+  padding: 10rpx;
+  display: inline-block;
+  height: 100%;
+  width: 50%;
+}
+
+.operation_item_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.operation_item_btn text {
+  font-size: 60rpx;
+}

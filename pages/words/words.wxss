@@ -1,0 +1,283 @@
+.bodystyle {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: url("https://www.hualigs.cn/image/60c600e438495.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
+
+.header {
+  height: 10%;
+  /* background-color: rgb(143, 139, 139); */
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+.options {
+  height: 100%;
+  float: left;
+}
+
+.learn_count {
+  height: 100%;
+  float: right;
+}
+.learn_count view {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50rpx;
+}
+
+.content {
+  height: 80%;
+  background-color: transparent;
+}
+
+.word {
+  height: 30%;
+  width: 100%;
+  /* background-color: #c573ac; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: #f20000; */
+}
+
+.word-text {
+  align-items: center;
+  height: 180rpx;
+  text-align: center;
+}
+
+.word-text > text {
+  font-size: 100rpx;
+}
+.soundBtn {
+  display: flex;
+  padding: 0;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 25rpx;
+}
+
+.soundBtn span {
+  font-size: 25rpx;
+}
+
+.soundBtn text {
+  font-size: 25rpx;
+}
+
+.soundBtn::after {
+  border: none;
+}
+
+.complete {
+  color: greenyellow;
+}
+
+.answer {
+  height: 70%;
+  /* background-color: greenyellow; */
+  padding: 10rpx;
+  padding-top: 40rpx;
+}
+
+.answer-item {
+  height: 25%;
+}
+
+.answerBtn {
+  height: 90%;
+  background-color: rgba(255, 255, 255, 0.7);
+
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 35rpx;
+  line-height: 45rpx;
+}
+.footer {
+  height: 10%;
+}
+
+.operations {
+  width: 100%;
+  /* padding-left: 20rpx;
+  padding-right: 20rpx; */
+}
+
+.operation-item {
+  display: inline-block;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.back {
+  /* float: left; */
+  width: 15%;
+}
+
+.setBtn {
+  display: flex;
+  height: 100%;
+  padding: 0;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+}
+.setBtn::after {
+  border: none;
+}
+.setBtn span {
+  font-size: 50rpx;
+}
+
+.up {
+  /* position: absolute; */
+  width: 70%;
+  text-align: center;
+}
+.upBtn {
+  display: flex;
+  height: 100%;
+  padding: 0;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+}
+.upBtn::after {
+  border: none;
+}
+.upBtn span {
+  font-size: 50rpx;
+}
+
+.delete {
+  /* float: right; */
+  width: 15%;
+}
+
+.deleteBtn {
+  display: flex;
+  height: 100%;
+  padding: 0;
+  background-color: transparent;
+
+  justify-content: center;
+  align-items: center;
+}
+.deleteBtn span {
+  font-size: 50rpx;
+}
+
+.deleteBtn::after {
+  border: none;
+}
+
+/* 上拉框 */
+.arrow {
+  display: inline-block;
+  border: 6px solid transparent;
+  border-top-color: #000;
+  margin-left: 8px;
+  position: relative;
+  top: 6rpx;
+}
+/* ---------------------------- */
+/*模态框*/
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+}
+.modal-cancel {
+  position: absolute;
+  z-index: 2000;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+.bottom-dialog-body {
+  height: 66%;
+  width: 100%;
+  position: absolute;
+  z-index: 3000;
+  bottom: 0;
+  left: 0;
+  background: #dfdede;
+}
+/*动画前初始位置*/
+.bottom-positon {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+/* 底部弹出框 */
+.bottom-positon {
+  text-align: center;
+}
+.Mselect {
+  /* height: 56%; */
+  margin-bottom: 20rpx;
+}
+.Mselect view {
+  padding: 26rpx 0;
+  background: #fff;
+}
+.Mselect view > button {
+  display: inline-block;
+}
+
+.Mselect view:not(:last-of-type) {
+  border-bottom: 1px solid #dfdede;
+}
+.Mcancel {
+  height: 10%;
+  background: #fff;
+  padding: 26rpx 0;
+}
+
+.soundBtn {
+  display: flex;
+  padding: 0;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 25rpx;
+}
+
+.soundBtn span {
+  font-size: 25rpx;
+}
+
+.soundBtn text {
+  font-size: 25rpx;
+}
+.liju {
+  font-size: 50rpx;
+}
+
+.tran {
+  font-size: medium;
+}

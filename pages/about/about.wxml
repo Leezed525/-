@@ -1,0 +1,41 @@
+<!-- pages/index4/about.wxml -->
+<!-- <view style="margin: 20px;text-align:left">我们来自浙江万里学院</view> -->
+<!-- 这里可以尝试使用时间轴 -->
+<!-- <navigator class="content" hover-class="none" open-type="navigateBack">
+      <button>返回</button>
+</navigator> -->
+<view class="cu-timeline bg-gray">
+  <view class="cu-time">2018-09</view>
+  <view class="cu-item">
+    <view class="bg-white content">
+      <text>我们开启在浙江万里学院的本科学习</text>
+    </view>
+  </view>
+  <view class="cu-time">2019-06</view>
+  <view class="cu-item">
+    <view class="bg-white content">
+      <text>我们进入浙江万里学院acm集训队集训</text>
+    </view>
+  </view>
+  <view class="cu-time">2020-06</view>
+  <view class="cu-item">
+    <view class="bg-white content">
+      <text>我们决定开始做这个项目</text>
+    </view>
+    <view class="bg-white content">
+      <text>我们策划并实现这一程序</text>
+    </view>
+  </view>
+  <view class="cu-time">2020-11</view>
+  <view class="cu-item">
+    <view class="bg-white content">
+      <text>我们为校夺取多项荣誉后从acm集训队退役</text>
+    </view>
+  </view>
+  <view class="cu-time">Now</view>
+  <view class="cu-item cur cuIcon-noticefill" style='color:#baddf7;'>
+    <view class="content shadow-blur" style="background:#baddf7;">
+      <text>我们仍在为自己，为未来，为学校，为祖国打磨自身</text>
+    </view>
+  </view>
+</view>

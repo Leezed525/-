@@ -1,0 +1,101 @@
+<view class="bodystyle">
+    <!-- 头部设置和单词学习个数 -->
+    <view class="header">
+        <view class="options"></view>
+        <view class="learn_count">
+            <view>
+                <text>{{complete_word.length}}/{{reuqestNumber}}</text>
+            </view>
+        </view>
+    </view>
+    <!-- 学习主页面 -->
+    <view class="content">
+        <view class="word">
+            <view class="main">
+                <view class="word-text">
+                    <text>{{current_word.word}}</text>
+                    <button class="soundBtn" bindtap='symbol_play'>
+                        <span class="iconfont icon-sound"></span>
+                        <text>{{current_word.symbols}}</text>
+                    </button>
+                    <span class="iconfont icon-wancheng complete" style="{{learnCountIcon[0]}}"></span>
+                    <span class="iconfont icon-wancheng complete" style="{{learnCountIcon[1]}}"></span>
+                    <span class="iconfont icon-wancheng complete" style="{{learnCountIcon[2]}}"></span>
+                </view>
+            </view>
+        </view>
+        <view class="answer">
+            <view class="answer-item">
+                <button class="answerBtn" type="{{ErrorId[0]}}" bindtap="{{answerbtn}}" data-id="0">
+                    <text>{{options[0]}}</text>
+                </button>
+            </view>
+            <view class="answer-item">
+                <button class="answerBtn" type="{{ErrorId[1]}}" bindtap="{{answerbtn}}" data-id="1">
+                    <text>{{options[1]}}</text>
+                </button>
+            </view>
+            <view class="answer-item">
+                <button class="answerBtn" type="{{ErrorId[2]}}" bindtap="{{answerbtn}}" data-id="2">
+                    <text>{{options[2]}}</text>
+                </button>
+            </view>
+            <view class="answer-item">
+                <button class="answerBtn" type="{{ErrorId[3]}}" bindtap="{{answerbtn}}" data-id="3">
+                    <text>{{options[3]}}</text>
+                </button>
+            </view>
+        </view>
+    </view>
+    <view class="footer">
+        <view class="operations">
+            <view class="operation-item back">
+                <!-- 设置按钮 -->
+                <button size="mini" class="setBtn">
+                    <span class="iconfont icon-Settingscontroloptions"></span>
+                </button>
+            </view>
+            <!-- 下拉框滑出 -->
+            <view class="operation-item up">
+                <button size="mini" class="upBtn">
+                    <span class="iconfont icon-direction-up"></span>
+                </button>
+            </view>
+            <view class="operation-item delete">
+                <!-- 已掌握 -->
+                <button size="mini" class="deleteBtn" bindtap="deleteWord">
+                    <span class="iconfont icon-delete"></span>
+                </button>
+            </view>
+        </view>
+    </view>
+    <!-- 上拉框 -->
+    <view class="modal modal-bottom-dialog" hidden="{{hideFlag}}">
+        <view class="modal-cancel" bindtap="hideModal"></view>
+        <view class="bottom-dialog-body bottom-positon" animation="{{animationData}}">
+            <!--  -->
+            <view class="Mselect">
+                <view>
+                    <text>例  句\n</text>
+                    <button size="mini" class="soundBtn">
+                        <span class="iconfont icon-sound"></span>
+                    </button>
+                    <view class="liju">
+                        <text>
+                            "Many patients are not getting the medical treatment they need."
+                        </text>
+                        <text class="tran">\n很多病人没有得到他们需要的医治。</text>
+                    </view>
+                </view>
+            </view>
+            <!-- <view class='Mselect'>
+                <view wx:for="{{optionList}}" wx:key="unique" data-value='{{item}}' bindtap='getOption'>
+                    {{item}}
+                </view>
+            </view> -->
+            <view class='Mcancel' bindtap='mCancel'>
+                <text>取消</text>
+            </view>
+        </view>
+    </view>
+</view>

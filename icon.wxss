@@ -1,0 +1,145 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 2477778 */
+  src: url("//at.alicdn.com/t/font_2477778_4w6vc3kal2k.woff2?t=1624262052087")
+      format("woff2"),
+    url("//at.alicdn.com/t/font_2477778_4w6vc3kal2k.woff?t=1624262052087")
+      format("woff"),
+    url("//at.alicdn.com/t/font_2477778_4w6vc3kal2k.ttf?t=1624262052087")
+      format("truetype");
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-delete:before {
+  content: "\e616";
+}
+
+.icon-sound:before {
+  content: "\e657";
+}
+
+.icon-Settingscontroloptions:before {
+  content: "\e9cb";
+}
+
+.icon-tubiao-fanyi:before {
+  content: "\e61c";
+}
+
+.icon-kaoshi:before {
+  content: "\e60b";
+}
+
+.icon-A:before {
+  content: "\e6e7";
+}
+
+.icon-14guanyu3x:before {
+  content: "\e604";
+}
+
+.icon-bug:before {
+  content: "\e600";
+}
+
+.icon-fenxiang:before {
+  content: "\e626";
+}
+
+.icon-qiandao:before {
+  content: "\e65d";
+}
+
+.icon-wancheng:before {
+  content: "\e659";
+}
+
+.icon-add:before {
+  content: "\e664";
+}
+
+.icon-add-circle:before {
+  content: "\e665";
+}
+
+.icon-browse:before {
+  content: "\e666";
+}
+
+.icon-bottom:before {
+  content: "\e667";
+}
+
+.icon-back:before {
+  content: "\e668";
+}
+
+.icon-close:before {
+  content: "\e669";
+}
+
+.icon-picture:before {
+  content: "\e67c";
+}
+
+.icon-save:before {
+  content: "\e67d";
+}
+
+.icon-search:before {
+  content: "\e67e";
+}
+
+.icon-sign-out:before {
+  content: "\e67f";
+}
+
+.icon-edit:before {
+  content: "\e66e";
+}
+
+.icon-user:before {
+  content: "\e682";
+}
+
+.icon-good:before {
+  content: "\e673";
+}
+
+.icon-arrow-down:before {
+  content: "\e66a";
+}
+
+.icon-direction-up:before {
+  content: "\e66c";
+}
+
+.icon-fabulous:before {
+  content: "\e66f";
+}
+
+.icon-smile:before {
+  content: "\e680";
+}
+
+.icon-upload:before {
+  content: "\e683";
+}
+
+.icon-xingqiu:before {
+  content: "\e60a";
+}
+
+.icon-yingyu:before {
+  content: "\e63f";
+}
+
+.icon-wode:before {
+  content: "\e699";
+}

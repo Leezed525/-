@@ -1,0 +1,2 @@
+<!-- pages/Real_questions/Real_questions.wxml -->
+<web-view src="http://cet4-6.xdf.cn/201711/10727762.html" bindmessage=""></web-view>

@@ -1,0 +1,67 @@
+<view class="page">
+    <view class="body-swiper1" bindtouchstart="touchstart" bindtouchend="touchend" style="z-index:{{index1}};top:{{ballTop1}}rpx;  margin-left:{{ballLeft1}}rpx;width:{{ballWidth1}}rpx;" animation="{{animationData}}">
+        <!-- 正面 -->
+        <block wx:if="{{MainorBack}}">
+            <view class="body-container" style="background-color:{{card_color1}}">
+                <view class="body-container-main1">
+                    <wux-button class="reverse-btn" clear bind:click="rotateFn">
+                        <wux-icon type="md-sync" color="#909090" />
+                    </wux-button>
+                    <!-- button class="reverse-btn" role="button" bindtap="rotateFn" >
+            <wux-icon type="md-sync" color="#909090"/>
+          </button -->
+                </view>
+                <view class="body-container-main2">
+                    <!-- <text> {{word_list[word_que[word_head % word_que.length]].word_Sentence}} </text> -->
+                    <text class="word_main">世界\n</text>
+                    <!-- <text class="word_context">语境：床前明月光</text> -->
+                </view>
+                <view class="body-container-main3">
+                    <button class="body-container-main3-btn" role="button" bindtap="rotateFn">
+                        <text class="body-container-main3-btn-text">点击此处查看具体释义</text>
+                    </button>
+                </view>
+            </view>
+        </block>
+        <!-- 反面 -->
+        <block wx:else>
+            <view class="body-container" style="transform: rotateY(-180deg)">
+                <view class='body-container-back1'>
+                    <wux-button class="reverse-btn" clear bind:click="rotateFn">
+                        <wux-icon type="md-sync" color="#909090" />
+                    </wux-button>
+                </view>
+                <view class='body-container-back2'>
+                    <text class="word_main">world\n</text>
+                </view>
+                <view class="body-container-back3">
+                    <button class="body-container-main3-btn" role="button" bindtap="rotateFn">
+                        <text class="body-container-back3-btn-text">例句</text>
+                        <text class="body-container-back3-btn-text">
+                            People came from all over the world to view her work. 
+                            人们从世界各地涌来欣赏她的作品。
+                        </text>
+                    </button>
+                </view>
+            </view>
+        </block>
+    </view>
+    <!-- 第二张 -->
+    <view class="body-swiper2">
+        <block>
+            <view class="body-container" style="background-color:{{card_color2}}"></view>
+        </block>
+    </view>
+    <!-- 第三张 -->
+    <view wx:if="{{card3_show}}" class="body-swiper3">
+        <block>
+            <view class="body-container" style="background-color:{{card_color3}}"></view>
+        </block>
+    </view>
+    <view>
+        <button class="btn1" role="button" bindtap="_UnKnow">我不认识</button>
+    </view>
+    <view>
+        <button class="btn2" role="button" bindtap="_Know">我认识</button>
+    </view>
+</view>

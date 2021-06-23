@@ -1,0 +1,38 @@
+<view class="base">
+  <view class="user">
+    <view class="face">
+      <image class="" src="../../images/face.jpg" mode="widthFix" lazy-load="false" binderror="" bindload="" />
+      <view class="username">理智点</view>
+    </view>
+  </view>
+  <view class="info">
+    <view class="info-child">
+      <span class="info-num">2天</span>
+      <view>
+        <span class="iconfont icon-qiandao"></span>
+        <p>签到</p>
+      </view>
+    </view>
+    <view class="info-child">
+      <span class="info-num">20</span>
+      <view>
+        <span class="iconfont icon-wancheng"></span>
+        <p>已背单词</p>
+      </view>
+    </view>
+  </view>
+  <view class="container">
+    <navigator class="opt-child">
+      <span class="iconfont icon-fenxiang"></span>
+      分享
+    </navigator>
+    <navigator class="opt-child">
+      <span class="iconfont icon-bug"></span>
+      意见反馈 & bug提交
+    </navigator>
+    <navigator class="opt-child" url="../about/about">
+      <span class="iconfont icon-14guanyu3x"></span>
+      关于我们
+    </navigator>
+  </view>
+</view>

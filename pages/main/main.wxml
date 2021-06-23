@@ -1,0 +1,59 @@
+<!-- pages/main/main.wxml -->
+<view class="bg">
+    <!-- 最上方查单词功能 -->
+    <!-- <view class="search_word">
+        <view class="weui-search-bar">
+            <view class="weui-search-bar__form"> -->
+    <!-- 搜索框 -->
+    <!-- <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input type="text" class="weui-search-bar__input" placeholder="请输入搜索内容" />
+                </view>
+            </view> -->
+    <!-- 搜索按钮,调用搜索查询方法 -->
+    <!-- <view class="weui-search-bar__cancel-btn" bindtap='方法名a'>搜索</view>
+        </view>
+    </view> -->
+    <!-- 轮播图 -->
+    <view></view>
+    <!-- 上方超链接按钮 -->
+    <view class="navigators">
+        <view class="navigators_item" wx:for="{{navigators}}" wx: wx:key="id">
+            <navigator url="{{item.targetUrl}}">
+                <span class="iconfont {{item.img_class}}"></span>
+                <!-- <image class="" src="{{item.img_url}}" mode="widthFix" lazy-load="false" binderror="" bindload=""></image> -->
+                {{item.text}}
+            </navigator>
+        </view>
+    </view>
+    <view class=".calendar">
+        <calendar weeks-type="cn" binddayClick="dayClick" />
+    </view>
+    <view class='datetimeTo '>
+        距离：
+        <text style='color:blue'>{{datetimeTo}}</text>
+    </view>
+    <view class='timeLeft'>
+        还有：
+        <text style='color:red'>{{timeLeft}}</text>
+    </view>
+    <!-- 左右滑动导航栏 -->
+    <!-- <view class="scroll_line">
+        <view class="banner">
+            <scroll-view scroll-x="true" scroll-with-animation="true" scroll-into-view="nav-{{select > 0 ? select -1 : select}}">
+                <view wx:for="{{sortList}}" wx:for-index="index" wx:key="index" id="nav-{{index}}" class="sort {{index == select ? 'choose' : ''}}" data-index='{{index}}' bindtap="activeTab">
+                    {{item.name}}
+                    <view class="line" wx:if="{{index == select}}"></view>
+                </view>
+            </scroll-view>
+        </view>
+        <swiper style="height:{{height}}px" current="{{select}}" duration="300" bindchange="activeSw">
+            <swiper-item wx:for="{{sortList.length}}" wx:key="index">
+                <view class="box" wx:if="{{select == 0}}">1</view>
+                <view class="box" wx:if="{{select == 1}}">2</view>
+                <view class="box" wx:if="{{select == 2}}">3</view>
+                <view class="box" wx:if="{{select == 3}}">4</view>
+            </swiper-item>
+        </swiper>
+    </view> -->
+</view>

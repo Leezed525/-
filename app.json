@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/words/words",
+    "pages/word_info/word_info",
+    "pages/main/main",
+    "pages/learn/learn",
+    "pages/user/user",
+    "pages/translate/translate",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/query/query",
+    "pages/study/study",
+    "pages/about/about",
+    "pages/Real_questions/Real_questions"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "草莓酱英语",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#a9b7b7",
+    "list": [
+      {
+        "selectedIconPath": "./images/xingqiu.png",
+        "iconPath": "./images/xingqiu.png",
+        "pagePath": "pages/main/main",
+        "text": "学习资讯"
+      },
+      {
+        "selectedIconPath": "./images/yingyu.png",
+        "iconPath": "./images/yingyu.png",
+        "pagePath": "pages/learn/learn",
+        "text": "背单词"
+      },
+      {
+        "selectedIconPath": "./images/wode.png",
+        "iconPath": "./images/wode.png",
+        "pagePath": "pages/user/user",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}
