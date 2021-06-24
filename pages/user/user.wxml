@@ -1,16 +1,16 @@
 <view class="base">
-  <view class="user">
+  <view class="user" bindtap="{{isLogin?'':'loginAndGetOpenid'}}">
     <view class="face">
-      <image class="" src="../../images/face.jpg" mode="widthFix" lazy-load="false" binderror="" bindload="" />
-      <view class="username">理智点</view>
+      <image class="" src="{{isLogin?userInfo.avatarurl:'../../images/face.jpg'}}" mode="widthFix" lazy-load="false" binderror="" bindload="" />
     </view>
+    <view class="username">{{isLogin?userInfo.nickname:'您还没有登录,点击登录'}}</view>
   </view>
-  <view class="info">
+  <view class="info" style="{{isLogin?'':'display:none'}}">
     <view class="info-child">
       <span class="info-num">2天</span>
       <view>
         <span class="iconfont icon-qiandao"></span>
-        <p>签到</p>
+        <p>已签到</p>
       </view>
     </view>
     <view class="info-child">

@@ -2,6 +2,7 @@
   padding: 10rpx;
 }
 .user {
+  position: relative;
   width: 100%;
   height: 250rpx;
   background-color: #fff;
@@ -19,9 +20,13 @@
   border: 3px solid #fff;
 }
 .user .username {
+  position: absolute;
+  left: 50%;
+  bottom: 0%;
   text-align: center;
   font-size: 20px;
   font-weight: bold;
+  transform: translateX(-50%);
 }
 
 .info {

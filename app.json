@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/user/user",
     "pages/words/words",
     "pages/word_info/word_info",
     "pages/main/main",
     "pages/learn/learn",
-    "pages/user/user",
     "pages/translate/translate",
     "pages/index/index",
     "pages/logs/logs",
