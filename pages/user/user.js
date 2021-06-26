@@ -1,4 +1,7 @@
 // pages/login/login.js
+
+var URLhead = "http://localhost:8080";
+
 Page({
   /**
    * 页面的初始数据
@@ -6,11 +9,15 @@ Page({
   data: {
     isLogin: false,
     userInfo: null,
+    isSignIn: false,
+    SignDaysFromLastDay: 0,
+    SignDaysFromToday: 0,
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.cloud.init();
     this.checkSessionAndLogin();
   },
 
@@ -49,8 +56,123 @@ Page({
    */
   onShareAppMessage: function () {},
 
+  //今天签到
+  SignInToday: function () {
+    var that = this;
+    var userInfo = that.data.userInfo;
+    wx.showModal({
+      title: "签到确认",
+      content: "确定要签到?",
+      showCancel: true, //是否显示取消按钮
+      success: function (res) {
+        console.log(res);
+        if (res.confirm) {
+          wx.cloud.callFunction({
+            name: "request",
+            data: {
+              url: URLhead + "/sign/SignInToday",
+              data: {
+                user_id: userInfo.id,
+              },
+            },
+            success: function (res) {
+              var title;
+              var res = res.result;
+              // console.log(res);
+              title = res.msg;
+              that.getSignDaysFromToday();
+              that.setData({
+                isSignIn: true,
+              });
+              wx.showToast({
+                title: title, //提示文字
+                duration: 500, //显示时长
+                mask: true, //是否显示透明蒙层，防止触摸穿透，默认：false
+                icon: res.code == 200 ? "success" : "error", //图标，支持"success"、"loading"
+              });
+            },
+          });
+        }
+      },
+    });
+  },
+
+  //到今天为止的签到天数
+  getSignDaysFromToday: function () {
+    var that = this;
+    wx.cloud.callFunction({
+      name: "request",
+      data: {
+        url: "sign/querySignInDaysToday",
+        data: {
+          user_id: that.data.userInfo.id,
+        },
+      },
+      success: function (res) {
+        // console.log(res);
+        that.setData({
+          SignDaysFromToday: res.result,
+        });
+      },
+    });
+  },
+
+  //获取只到昨天的签到数
+  getSignDaysFromLastDay: function () {
+    var that = this;
+    wx.cloud.callFunction({
+      name: "request",
+      data: {
+        url: URLhead + "/sign/querySignInDaysLastDay",
+        data: {
+          user_id: that.data.userInfo.id,
+        },
+      },
+      success: function (res) {
+        // console.log(res);
+        that.setData({
+          SignDaysFromLastDay: res.result,
+        });
+      },
+    });
+  },
+
+  CheckIsSignIn: function () {
+    // 检查是否已经签到
+    var that = this;
+    if (!that.data.isLogin) {
+      console.log("还没登录,无法查看是否签到");
+      return;
+    } else {
+      console.log("已经登陆,进行签到检查");
+      var userInfo = that.data.userInfo;
+      wx.cloud.callFunction({
+        name: "request",
+        data: {
+          url: "sign/isSignInToday",
+          data: {
+            user_id: userInfo.id,
+          },
+        },
+        success: function (res) {
+          var res = res.result;
+          console.log(res);
+          if (res.code === -1) {
+            that.setData({
+              isSignIn: true,
+            });
+            that.getSignDaysFromToday();
+          } else {
+            that.getSignDaysFromLastDay();
+          }
+        },
+      });
+    }
+  },
+
   //以下部分为微信登录模块
 
+  //检查是否登录和登陆是否还有效
   checkSessionAndLogin: function () {
     let that = this;
     let thisOpenId = wx.getStorageSync("openid");
@@ -64,7 +186,9 @@ Page({
           that.setData({
             isLogin: true,
           });
-          that.getUserInfoFromServer(thisOpenId);
+          that.getUserInfoFromServer(thisOpenId).then(function (data) {
+            that.CheckIsSignIn();
+          });
         },
         fail: function () {
           console.log("but session_key expired");
@@ -82,9 +206,10 @@ Page({
       that.setData({
         isLogin: false,
       });
-      that.loginAndGetOpenid();
+      // that.loginAndGetOpenid();
     }
   },
+
   // 执行登录操作并获取用户openId
   loginAndGetOpenid: function () {
     var that = this;
@@ -93,11 +218,14 @@ Page({
       success: function (res) {
         openId = res.data;
         if (res.code) {
-          console.log(res.code);
-          wx.request({
-            url: "http://localhost:8080/login/onLogin",
+          // console.log(res.code);
+          wx.cloud.callFunction({
+            name: "request",
             data: {
-              code: res.code,
+              url: "login/onLogin",
+              data: {
+                code: res.code,
+              },
             },
             success: function (res) {
               console.log(res);
@@ -105,78 +233,105 @@ Page({
               that.setData({
                 isLogin: true,
               });
-              openId = res.data;
-              wx.setStorageSync("openid", openId);
-              if (res.statusCode === 200) {
-                // wx.showModal({
-                //   title: "set openid",
-                //   content: res.data,
-                // });
-                // 判断这个用户是否是第一次进入小程序，如果是的话将用户信息存入数据库
-                that.isUserExistReturnBool(res.data).then(function (data) {
-                  var flag = data;
-                  console.log(flag);
-                  if (!flag) {
-                    console.log("从来没登陆过，将用户信息传入数据库");
-                    wx.getUserInfo({
-                      success: function (res) {
-                        var userInfo = res.userInfo;
-                        console.log(userInfo);
-                        wx.request({
-                          url: "http://localhost:8080/user/register",
-                          data: {
-                            avatarurl: userInfo.avatarUrl,
-                            city: userInfo.city,
-                            country: userInfo.country,
-                            gender: userInfo.gender,
-                            nickname: userInfo.nickName,
-                            province: userInfo.province,
-                            openId: openId,
-                          },
-                          success: function (res) {
+              openId = res.result;
+              // 判断这个用户是否是第一次进入小程序，如果是的话将用户信息存入数据库
+              that.isUserExistReturnBool(openId).then(function (data) {
+                var flag = data;
+                // console.log(flag);
+                if (!flag) {
+                  var userInfo;
+                  console.log("从来没登陆过，将用户信息传入数据库");
+                  wx.showModal({
+                    title: "温馨提示",
+                    content: "亲，授权微信登录后才能正常使用小程序功能",
+                    success(res) {
+                      //如果用户点击了确定按钮
+                      if (res.confirm) {
+                        wx.getUserProfile({
+                          desc: "获取你的昵称、头像、地区及性别",
+                          success: (res) => {
+                            console.log("收到的用户信息为：");
                             console.log(res);
-                            console.log("注册成功");
-                          },
-                          complete: function () {
+                            userInfo = res.userInfo;
+                            console.log(userInfo);
+                            wx.setStorageSync("openid", openId);
+                            wx.cloud.callFunction({
+                              name: "request",
+                              data: {
+                                url: "user/register",
+                                data: {
+                                  avatarurl: userInfo.avatarUrl,
+                                  city: userInfo.city,
+                                  country: userInfo.country,
+                                  gender: userInfo.gender,
+                                  nickname: userInfo.nickName,
+                                  province: userInfo.province,
+                                  openId: openId,
+                                },
+                              },
+                              success: function (res) {
+                                // console.log(res);
+                                console.log("注册成功");
+                              },
+                              complete: function () {},
+                            });
                             that.getUserInfoFromServer(openId);
                           },
+                          fail: (res) => {
+                            wx.showToast({
+                              title: "您拒绝了请求,不能正常使用小程序",
+                              icon: "error",
+                              duration: 2000,
+                            });
+                          },
                         });
-                      },
-                    });
-                  }
-                  //如果登陆过直接将userinfo展示
-                  else {
-                    console.log("登陆过直接展示");
-                    that.getUserInfoFromServer(openId);
-                  }
-                });
-
-                // that.sendUserInfoToServer();
-              } else {
-                wx.showModal({
-                  title: "Sorry",
-                  content: "用户登录失败~",
-                });
-              }
+                      } else if (res.cancel) {
+                        //如果用户点击了取消按钮
+                        console.log(3);
+                        wx.showToast({
+                          title: "您拒绝了请求,不能正常使用小程序",
+                          icon: "error",
+                          duration: 2000,
+                        });
+                      }
+                    },
+                  });
+                }
+                //如果登陆过直接将userinfo展示
+                else {
+                  console.log("登陆过直接展示");
+                  wx.setStorageSync("openid", openId);
+                  var userInfo;
+                  that.getUserInfoFromServer(openId).then(function (res) {
+                    console.log(res);
+                  });
+                }
+              });
             },
-            complete: function () {},
           });
         }
       },
     });
+    //再去检查是否登陆成功
+    that.checkSessionAndLogin();
   },
 
   // 判断用户是否存在
   isUserExistReturnBool(open_id) {
     var code;
+    console.log("验证存在接受的id是" + open_id);
     return new Promise(function (resolve, reject) {
-      wx.request({
-        url: "http://localhost:8080/user/isUserExist",
+      wx.cloud.callFunction({
+        name: "request",
         data: {
-          open_id: open_id,
+          url: "user/isUserExist",
+          data: {
+            open_id: open_id,
+          },
         },
         success: function (res) {
-          var res = res.data;
+          var res = res.result;
+          console.log(res);
           code = res.code;
         },
         fail: function () {
@@ -188,8 +343,10 @@ Page({
         },
         complete: function () {
           if (code === 200) {
+            console.log("注册过");
             resolve(true);
           } else {
+            console.log("没注册过");
             resolve(false);
           }
         },
@@ -197,20 +354,27 @@ Page({
     });
   },
 
+  //从服务器中获取用户信息
   getUserInfoFromServer: function (open_id) {
     var that = this;
-    wx.request({
-      url: "http://localhost:8080/user/getUserInfoByOpenId",
-      data: {
-        openid: open_id,
-      },
-      success: function (res) {
-        var userInfo = res.data;
-        wx.setStorageSync("userInfo", userInfo);
-        that.setData({
-          userInfo: userInfo,
-        });
-      },
+    return new Promise(function (resolve, reject) {
+      wx.cloud.callFunction({
+        name: "request",
+        data: {
+          url: "user/getUserInfoByOpenId",
+          data: {
+            openid: open_id,
+          },
+        },
+        success: function (res) {
+          var userInfo = res.result;
+          wx.setStorageSync("userInfo", userInfo);
+          that.setData({
+            userInfo: userInfo,
+          });
+          resolve(userInfo);
+        },
+      });
     });
   },
 
@@ -222,7 +386,7 @@ Page({
   //   userInfo.openid = thisOpenId;
 
   //   wx.request({
-  //     url: Domain + "/user/updateUser",
+  //     url: URLhead + "/user/updateUser",
   //     method: "POST",
   //     dataType: "json",
   //     data: userInfo,

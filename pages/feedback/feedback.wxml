@@ -1,0 +1,11 @@
+<view>
+    <view class="main">
+        <form action="">
+            <textarea name="" id="" placeholder="请输入您的反馈意见" style="width: 650rpx"></textarea>
+            <input type="text" placeholder="联系方式" style="width: 650rpx" />
+            <button style="width: 650rpx; height: 100rpx; font-size: 36rpx; line-height: 70rpx; font-weight: 400; border-radius: 20rpx;">
+                提交
+            </button>
+        </form>
+    </view>
+</view>

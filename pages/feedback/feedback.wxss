@@ -1,0 +1,62 @@
+.nav {
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #5a5a5a;
+  border-bottom: 1px solid #dadada;
+}
+
+text {
+  float: left;
+  margin-left: 30rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.title {
+  position: absolute;
+  left: 40%;
+  font-weight: 700;
+  font-size: 38rpx;
+}
+
+.main {
+  height: 1098rpx;
+  background-color: #f2f2f2;
+  position: relative;
+}
+
+textarea {
+  height: 350rpx;
+  width: 610rpx;
+  border: 1px solid #5a5a5a;
+  border-radius: 10rpx;
+  position: absolute;
+  top: 50rpx;
+  left: 50rpx;
+  background-color: #fff;
+  padding: 20rpx;
+  font-size: 36rpx;
+  font-weight: 400;
+}
+
+input {
+  height: 50px;
+  width: 610rpx;
+  border: 1px solid #5a5a5a;
+  border-radius: 10rpx;
+  position: absolute;
+  top: 500rpx;
+  left: 50rpx;
+  background-color: #fff;
+  padding: 20rpx;
+  font-size: 36rpx;
+  font-weight: 400;
+}
+
+button {
+  position: absolute;
+  top: 650rpx;
+  left: 50rpx;
+  background-color: #fa644c;
+  color: #fff;
+}

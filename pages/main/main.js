@@ -31,7 +31,7 @@ Page({
         id: 4,
         text: "翻译",
         img_class: "icon-tubiao-fanyi",
-        targetUrl: "/pages/translate/translate",
+        targetUrl: "/pages/new_translate/new_translate",
       },
     ],
     select: 0,
@@ -52,7 +52,7 @@ Page({
     ],
     placeList: [1, 2, 3, 4],
     newsUrl: "https://www.chsi.com.cn/cet/",
-    datetimeTo: "下一次四六级考试 2021/6/12", // 秒杀开始时间
+    datetimeTo: "下一次四六级考试 2021/12/15", // 秒杀开始时间
     timeLeft: "", // 剩下的时间（天时分秒）
   },
 

@@ -1,16 +1,18 @@
 {
   "pages": [
+    "pages/main/main",
+    "pages/test/test",
+    "pages/new_translate/new_translate",
     "pages/user/user",
     "pages/words/words",
     "pages/word_info/word_info",
-    "pages/main/main",
     "pages/learn/learn",
-    "pages/translate/translate",
     "pages/index/index",
     "pages/logs/logs",
     "pages/query/query",
     "pages/study/study",
     "pages/about/about",
+    "pages/feedback/feedback",
     "pages/Real_questions/Real_questions"
   ],
   "window": {

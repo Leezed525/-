@@ -6,11 +6,11 @@
     <view class="username">{{isLogin?userInfo.nickname:'您还没有登录,点击登录'}}</view>
   </view>
   <view class="info" style="{{isLogin?'':'display:none'}}">
-    <view class="info-child">
-      <span class="info-num">2天</span>
+    <view class="info-child" bindtap="{{isSignIn?'':'SignInToday'}}">
+      <span class="info-num">{{isSignIn?SignDaysFromToday:SignDaysFromLastDay}}天</span>
       <view>
         <span class="iconfont icon-qiandao"></span>
-        <p>已签到</p>
+        <p>{{isSignIn?'已签到':'点击签到'}}</p>
       </view>
     </view>
     <view class="info-child">
@@ -26,7 +26,7 @@
       <span class="iconfont icon-fenxiang"></span>
       分享
     </navigator>
-    <navigator class="opt-child">
+    <navigator class="opt-child" url="../feedback/feedback">
       <span class="iconfont icon-bug"></span>
       意见反馈 & bug提交
     </navigator>

@@ -22,6 +22,50 @@ Page({
     rightFlag: false,
   },
 
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    wx.cloud.init();
+    this.getWords(10);
+    /* seting watting_word */
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {},
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {},
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {},
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {},
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {},
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {},
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {},
+
   // 点击音标播放声音
   symbol_play: function () {
     const innerAudioContext = wx.createInnerAudioContext();
@@ -58,23 +102,41 @@ Page({
 
   //向服务器获取选项数据
   getOptions: function (word) {
-    wx.request({
-      url: "http://localhost:8080/word/getAnswersByWords",
-      data: { word: word },
-      header: { "content-type": "application/json" },
-      method: "GET",
-      dataType: "json",
-      responseType: "text",
-      success: (result) => {
-        // console.log(result);
-        this.setData({
-          options: result.data.means,
-          RightId: result.data.rightIndex,
+    var that = this;
+    wx.cloud.callFunction({
+      name: "request",
+      data: {
+        url: "word/getAnswersByWords",
+        data: {
+          word: word,
+        },
+      },
+      success: (res) => {
+        var res = res.result;
+        console.log(res);
+        that.setData({
+          options: res.means,
+          RightId: res.rightIndex,
         });
       },
-      fail: () => {},
-      complete: () => {},
     });
+    // wx.request({
+    //   url: "http://localhost:8080/word/getAnswersByWords",
+    //   data: { word: word },
+    //   header: { "content-type": "application/json" },
+    //   method: "GET",
+    //   dataType: "json",
+    //   responseType: "text",
+    //   success: (result) => {
+    //     // console.log(result);
+    //     this.setData({
+    //       options: result.data.means,
+    //       RightId: result.data.rightIndex,
+    //     });
+    //   },
+    //   fail: () => {},
+    //   complete: () => {},
+    // });
   },
 
   //下一单词
@@ -147,27 +209,78 @@ Page({
   },
 
   getWords: function (number) {
-    wx.request({
-      url: "http://localhost:8080/word/getWordsByNumber?",
-      data: { number: number },
-      header: { "content-type": "application/json" },
-      method: "GET",
-      dataType: "json",
-      success: (result) => {
-        // console.log(result);
-        this.setData({
-          waiting_word: result.data,
-          current_word: result.data[0],
+    var that = this;
+    wx.showLoading({
+      title: "加载中",
+      mask: true,
+    });
+    //用来同步异步请求
+    wx.cloud.callFunction({
+      name: "request",
+      data: {
+        url: "word/getWordsByNumber",
+        data: {
+          number: number,
+        },
+      },
+      success: function (res) {
+        console.log("调用成功");
+        console.log(res);
+        that.setData({
+          waiting_word: res.result,
+          current_word: res.result[0],
+        });
+        that.getOptions(that.data.current_word.word);
+        that.symbol_play();
+        wx.hideLoading();
+      },
+      fail: function (err) {
+        console.log("调用失败");
+        wx.hideLoading();
+        wx.showToast({
+          title: "单词数据请求失败",
+          icon: "error",
+          duration: 1500,
+          mask: true,
+          complete: () => {
+            setTimeout(function () {
+              wx.navigateBack({
+                delta: 1,
+              });
+            }, 1000);
+          },
         });
       },
-      fail: () => {
-        console.log("请求单词数据失败");
-      },
-      complete: () => {
-        this.getOptions(this.data.current_word.word);
-        this.symbol_play();
+      complete: function (res) {
+        console.log("调用结束");
+        console.log(res);
       },
     });
+
+    //因为微信不能对没有域名的服务器进行请求，所以转成再云函数中对没有域名的服务器进行请求，
+    //然后就可以让代码上线，很卑微，为此我将之前写的代码全部重构。。。。。
+
+    // wx.request({
+    //   url: "http://localhost:8080/",
+    //   data: { number: number },
+    //   header: { "content-type": "application/json" },
+    //   method: "GET",
+    //   dataType: "json",
+    //   success: (result) => {
+    //     // console.log(result);
+    //     this.setData({
+    //       waiting_word: result.data,
+    //       current_word: result.data[0],
+    //     });
+    //   },
+    //   fail: () => {
+    //     console.log("请求单词数据失败");
+    //   },
+    //   complete: () => {
+    //     this.getOptions(this.data.current_word.word);
+    //     this.symbol_play();
+    //   },
+    // });
   },
 
   deleteWord() {
@@ -210,48 +323,6 @@ Page({
       },
     });
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    this.getWords(10);
-    /* seting watting_word */
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {},
 
   // 点击选项
   getOption: function (e) {

@@ -1,0 +1,13 @@
+<view class="bodystyle">
+    <!-- <view class="nav">
+        <text decode>&lt; 返回</text>
+        <view class="title">翻译</view>
+    </view> -->
+    <view class="main">
+        <text class="yuanwen">原文：</text>
+        <textarea name="" id="" style="width: 650rpx;" bindinput="getText"></textarea>
+        <button class="btn" bindtap="translate">翻译</button>
+        <text class="jieguo">结果：</text>
+        <view class="result">{{ result_info }}</view>
+    </view>
+</view>
