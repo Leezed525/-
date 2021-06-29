@@ -13,8 +13,8 @@
         <p>{{isSignIn?'已签到':'点击签到'}}</p>
       </view>
     </view>
-    <view class="info-child">
-      <span class="info-num">20</span>
+    <view class="info-child" bindtap="toCompleteWordList">
+      <span class="info-num">{{completeWordsNumber}}</span>
       <view>
         <span class="iconfont icon-wancheng"></span>
         <p>已背单词</p>

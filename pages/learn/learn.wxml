@@ -4,11 +4,11 @@
             <text class="sentence_content">{{content}}</text>
             <text>\n{{note}}</text>
         </view>
-        <view class="sign">
+        <view class="sign" bindtap="{{isSignIn?'':'SignInToday'}}">
             <button class="btn btn_qiandao">
                 <view>
                     <span class="iconfont icon-qiandao"></span>
-                    <text>\n签到</text>
+                    <text>\n{{isSignIn?'已签到':'点击签到'}}</text>
                 </view>
             </button>
         </view>

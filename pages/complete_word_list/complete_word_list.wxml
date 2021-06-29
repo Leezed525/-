@@ -1,0 +1,77 @@
+<view class="bodystyle">
+    <!-- 最上方查单词功能 -->
+    <view>
+        <view>
+            <view class="weui-search-bar">
+                <view class="weui-search-bar__form">
+                    <!-- 搜索框 -->
+                    <view class="weui-search-bar__box">
+                        <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                        <input type="text" class="weui-search-bar__input" placeholder="请输入搜索内容" bindinput="changeQueryWord" />
+                    </view>
+                </view>
+                <!-- 搜索按钮,调用搜索查询方法 -->
+                <view class="weui-search-bar__cancel-btn" bindtap='search_word'>搜索</view>
+            </view>
+        </view>
+    </view>
+    <view class="header">
+        <text class="">当前学习了10个单词</text>
+    </view>
+    <view class="wordlist">
+        <view class="worditem" wx:for="{{complete_word_list}}">
+            <view class="word-info">
+                <text class="word-info-main">{{item.word.word}}</text>
+                <text>\n{{item.word.symbols}}</text>
+            </view>
+            <view class="operations">
+                <view class="operation-item" data-index="{{index}}" bindtap="getInfo">
+                    <button size="mini" type="primary" class="operation-btn">
+                        <text class="">查看</text>
+                        <span class="iconfont icon-right"></span>
+                    </button>
+                </view>
+                <view class="operation-item" data-index="{{index}}" bindtap="deleteWord">
+                    <button size="mini" type="warn" class="operation-btn">
+                        <text class="">遗忘</text>
+                        <span class="iconfont icon-wangjimima"></span>
+                    </button>
+                </view>
+            </view>
+        </view>
+    </view>
+    <!-- 上拉框 -->
+    <view class="modal modal-bottom-dialog" hidden="{{hideFlag}}">
+        <view class="modal-cancel" bindtap="hideModal"></view>
+        <view class="bottom-dialog-body bottom-positon" animation="{{animationData}}">
+            <!--  -->
+            <view class="word-text">
+                <text>{{show_info_word.word}}</text>
+                <button class="soundBtn" bindtap='symbol_play'>
+                    <span class="iconfont icon-sound"></span>
+                    <text>{{show_info_word.symbols}}</text>
+                </button>
+            </view>
+            <view class="Mselect">
+                <view>
+                    <text>例  句\n</text>
+                    <button size="mini" class="soundBtn" bindtap="playex">
+                        <span class="iconfont icon-sound"></span>
+                    </button>
+                    <view class="liju">
+                        <text>{{show_info_word.ex}}</text>
+                        <text class="tran">\n{{show_info_word.tran}}</text>
+                    </view>
+                </view>
+            </view>
+            <!-- <view class='Mselect'>
+                <view wx:for="{{optionList}}" wx:key="unique" data-value='{{item}}' bindtap='getOption'>
+                    {{item}}
+                </view>
+            </view> -->
+            <view class='Mcancel' bindtap='mCancel'>
+                <text>下一单词</text>
+            </view>
+        </view>
+    </view>
+</view>

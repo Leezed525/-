@@ -1,0 +1,32 @@
+<view class="bodystyle">
+    <view class="content">
+        <view class="wanchengImg">
+            <span class="iconfont icon-wancheng"></span>
+        </view>
+        <view class="congratulation">
+            <text>恭喜你！学习完了本组单词</text>
+        </view>
+        <view class="info">
+            <view class="info-item">
+                <view>学习了{{completeNumber}}个单词</view>
+            </view>
+            <view class="info-item">
+                <view>用户名：{{userInfo.nickname}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="operations">
+        <view class="operation-item">
+            <button class="btn" type="primary" bindtap="review">
+                <span class="iconfont icon-kuaisufuxi"></span>
+                <text>前往拼写复习</text>
+            </button>
+        </view>
+        <view class="operation-item" bindtap="back">
+            <button class="btn" type="default">
+                <span class="iconfont icon-main"></span>
+                <text>返回主界面</text>
+            </button>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,32 @@
+.bodystyle {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
+
+.content {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+}
+
+.wanchengImg span {
+  font-size: 250rpx;
+  color: greenyellow;
+}
+
+.congratulation text {
+  font-size: 50rpx;
+}
+
+.info-item view {
+  font-size: 40rpx;
+}

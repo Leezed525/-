@@ -46,8 +46,13 @@
   border-left: 1px solid #000;
 }
 
+.info-child view {
+  line-height: 20rpx;
+}
+
 .info-num {
   font-size: 25px;
+  line-height: 100rpx;
 }
 
 .container {

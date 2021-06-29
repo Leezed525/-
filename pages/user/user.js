@@ -1,7 +1,4 @@
 // pages/login/login.js
-
-var URLhead = "http://localhost:8080";
-
 Page({
   /**
    * 页面的初始数据
@@ -12,6 +9,7 @@ Page({
     isSignIn: false,
     SignDaysFromLastDay: 0,
     SignDaysFromToday: 0,
+    completeWordsNumber: 0,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -56,6 +54,40 @@ Page({
    */
   onShareAppMessage: function () {},
 
+  //跳转到单词列表
+  toCompleteWordList: function () {
+    wx.navigateTo({
+      url: "../complete_word_list/complete_word_list",
+    });
+  },
+
+  //获取该用户到现在为止学了多少个单词
+  getCompleteWordsNumber: function () {
+    var that = this;
+    var user_id = that.data.userInfo.id;
+    return new Promise(function (resolve, reject) {
+      wx.cloud.callFunction({
+        name: "request",
+        data: {
+          url: "word/getCompleteWordsNumberByUser_id",
+          data: {
+            user_id: user_id,
+          },
+        },
+        success: function (res) {
+          var res = res.result;
+          // console.log(res);
+          that.setData({
+            completeWordsNumber: res,
+          });
+        },
+        complete: function () {
+          resolve();
+        },
+      });
+    });
+  },
+
   //今天签到
   SignInToday: function () {
     var that = this;
@@ -70,7 +102,7 @@ Page({
           wx.cloud.callFunction({
             name: "request",
             data: {
-              url: URLhead + "/sign/SignInToday",
+              url: "sign/SignInToday",
               data: {
                 user_id: userInfo.id,
               },
@@ -123,12 +155,13 @@ Page({
     wx.cloud.callFunction({
       name: "request",
       data: {
-        url: URLhead + "/sign/querySignInDaysLastDay",
+        url: "sign/querySignInDaysLastDay",
         data: {
           user_id: that.data.userInfo.id,
         },
       },
       success: function (res) {
+        console.log(res);
         // console.log(res);
         that.setData({
           SignDaysFromLastDay: res.result,
@@ -137,37 +170,43 @@ Page({
     });
   },
 
+  //检查今天是否签到过
   CheckIsSignIn: function () {
     // 检查是否已经签到
     var that = this;
-    if (!that.data.isLogin) {
-      console.log("还没登录,无法查看是否签到");
-      return;
-    } else {
-      console.log("已经登陆,进行签到检查");
-      var userInfo = that.data.userInfo;
-      wx.cloud.callFunction({
-        name: "request",
-        data: {
-          url: "sign/isSignInToday",
+    return new Promise(function (resolve, reject) {
+      if (!that.data.isLogin) {
+        console.log("还没登录,无法查看是否签到");
+        return;
+      } else {
+        console.log("已经登陆,进行签到检查");
+        var userInfo = that.data.userInfo;
+        wx.cloud.callFunction({
+          name: "request",
           data: {
-            user_id: userInfo.id,
+            url: "sign/isSignInToday",
+            data: {
+              user_id: userInfo.id,
+            },
           },
-        },
-        success: function (res) {
-          var res = res.result;
-          console.log(res);
-          if (res.code === -1) {
-            that.setData({
-              isSignIn: true,
-            });
-            that.getSignDaysFromToday();
-          } else {
-            that.getSignDaysFromLastDay();
-          }
-        },
-      });
-    }
+          success: function (res) {
+            var res = res.result;
+            console.log(res);
+            if (res.code === -1) {
+              that.setData({
+                isSignIn: true,
+              });
+              that.getSignDaysFromToday();
+            } else {
+              that.getSignDaysFromLastDay();
+            }
+          },
+          complete: function () {
+            resolve();
+          },
+        });
+      }
+    });
   },
 
   //以下部分为微信登录模块
@@ -187,7 +226,18 @@ Page({
             isLogin: true,
           });
           that.getUserInfoFromServer(thisOpenId).then(function (data) {
-            that.CheckIsSignIn();
+            wx.showLoading({
+              title: "加载用户数据中",
+              mask: true,
+            });
+            Promise.all([
+              that.CheckIsSignIn(),
+              that.getCompleteWordsNumber(),
+            ]).then(function (res) {
+              setTimeout(function () {
+                wx.hideLoading();
+              }, 500);
+            });
           });
         },
         fail: function () {
@@ -301,9 +351,9 @@ Page({
                 else {
                   console.log("登陆过直接展示");
                   wx.setStorageSync("openid", openId);
-                  var userInfo;
                   that.getUserInfoFromServer(openId).then(function (res) {
                     console.log(res);
+                    that.checkSessionAndLogin();
                   });
                 }
               });
@@ -313,7 +363,6 @@ Page({
       },
     });
     //再去检查是否登陆成功
-    that.checkSessionAndLogin();
   },
 
   // 判断用户是否存在

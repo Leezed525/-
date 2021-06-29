@@ -1,10 +1,13 @@
 {
   "pages": [
     "pages/main/main",
+    "pages/review/review",
+    "pages/complete_word_list/complete_word_list",
+    "pages/words/words",
+    "pages/words_complete/words_complete",
     "pages/test/test",
     "pages/new_translate/new_translate",
     "pages/user/user",
-    "pages/words/words",
     "pages/word_info/word_info",
     "pages/learn/learn",
     "pages/index/index",

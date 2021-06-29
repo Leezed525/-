@@ -4,12 +4,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    waittingnode: 1,
     // 准备学习的单词
-    waiting_word: [],
+    waittingnode: 1,
     // 学完的单词
-    complete_word: [],
+    waiting_word: [],
     //现在在学的单词
+    complete_word: [],
     current_word: {},
     RightId: 0,
     ErrorId: ["", "", "", ""],
@@ -20,6 +20,7 @@ Page({
     hideFlag: true, //true-隐藏  false-显示
     animationData: {}, //
     rightFlag: false,
+    userInfo: null,
   },
 
   /**
@@ -27,7 +28,10 @@ Page({
    */
   onLoad: function (options) {
     wx.cloud.init();
-    this.getWords(10);
+    this.setData({
+      userInfo: wx.getStorageSync("userInfo"),
+    });
+    this.getWords(this.data.reuqestNumber);
     /* seting watting_word */
   },
 
@@ -100,6 +104,76 @@ Page({
     innerAudioContext.play();
   },
 
+  // 学习完了，跳转到学习完成页
+  learnComplete: function () {
+    var that = this;
+    var complete_wordList = [];
+    var complete_word = this.data.complete_word;
+    var userInfo = this.data.userInfo;
+    for (var i = 0; i < complete_word.length; i++) {
+      var word = {
+        word_id: complete_word[i].id,
+        user_id: userInfo.id,
+      };
+      complete_wordList.push(word);
+    }
+    //上传学习完的单词数据
+    wx.cloud.callFunction({
+      name: "request_post",
+      data: {
+        url: "word/learnCompleteWordsByIds",
+        data: {
+          words: complete_wordList,
+        },
+      },
+      success: function (res) {
+        var res = res.result;
+        console.log(res);
+        if (res.code != 200) {
+          wx.showModal({
+            title: "ERROR",
+            content: "服务器请求错误",
+            showCancel: false,
+            confirmText: "确定",
+            confirmColor: "#3CC51F",
+            success: (result) => {
+              if (result.confirm) {
+                wx.switchTab({
+                  url: "../learn/learn",
+                });
+              }
+            },
+          });
+        } else {
+          wx.redirectTo({
+            url:
+              "../words_complete/words_complete?requestNumber=" +
+              that.data.reuqestNumber,
+          });
+        }
+      },
+      fail: function () {
+        wx.showModal({
+          title: "ERROR",
+          content: "服务器请求错误",
+          showCancel: false,
+          confirmText: "确定",
+          confirmColor: "#3CC51F",
+          success: (result) => {
+            if (result.confirm) {
+              wx.switchTab({
+                url: "../learn/learn",
+              });
+            }
+          },
+        });
+      },
+      complete: function () {
+        console.log("completeWord!!");
+      },
+    });
+  },
+
   //向服务器获取选项数据
   getOptions: function (word) {
     var that = this;
@@ -120,23 +194,6 @@ Page({
         });
       },
     });
-    // wx.request({
-    //   url: "http://localhost:8080/word/getAnswersByWords",
-    //   data: { word: word },
-    //   header: { "content-type": "application/json" },
-    //   method: "GET",
-    //   dataType: "json",
-    //   responseType: "text",
-    //   success: (result) => {
-    //     // console.log(result);
-    //     this.setData({
-    //       options: result.data.means,
-    //       RightId: result.data.rightIndex,
-    //     });
-    //   },
-    //   fail: () => {},
-    //   complete: () => {},
-    // });
   },
 
   //下一单词
@@ -146,6 +203,7 @@ Page({
     var waitting_word = this.data.waiting_word;
     var complete_word = this.data.complete_word;
     var waittingnode = this.data.waittingnode;
+    var reuqestNumber = this.data.reuqestNumber;
     var learnCountIcon = ["display:none", "display:none", "display:none"];
     // 将按钮全部恢复原样
     this.setData({
@@ -157,12 +215,16 @@ Page({
     } else {
       waitting_word.push(current_word);
     }
+    // 这组单词学完了，然后进行数据处理（将学完的单词上传到数据库统计），跳转到学习成功页，
+    if (complete_word.length === reuqestNumber) {
+      console.log("学完了");
+      that.learnComplete();
+      return;
+    }
     current_word = waitting_word[waittingnode];
     waittingnode++;
     // 更换单词选项
     this.getOptions(current_word.word);
-    // 如果waittingnode = number * 30
-    // 这组单词学完了，然后进行数据处理（将学完的单词上传到数据库统计），跳转到学习成功页，
     for (var i = 0; i < current_word.learnCount; i++) {
       learnCountIcon[i] = "";
     }
@@ -178,6 +240,7 @@ Page({
     this.symbol_play();
   },
 
+  //点击选项按钮
   clickAnswer(event) {
     let id = event.currentTarget.dataset.id;
     console.log(id);
@@ -208,18 +271,20 @@ Page({
     }
   },
 
+  //从服务器中获取单词
   getWords: function (number) {
     var that = this;
+    let userInfo = this.data.userInfo;
     wx.showLoading({
       title: "加载中",
       mask: true,
     });
-    //用来同步异步请求
     wx.cloud.callFunction({
       name: "request",
       data: {
         url: "word/getWordsByNumber",
         data: {
+          user_id: userInfo.id,
           number: number,
         },
       },
@@ -297,8 +362,14 @@ Page({
           var waitting_word = that.data.waiting_word;
           var complete_word = that.data.complete_word;
           var waittingnode = that.data.waittingnode;
+          var reuqestNumber = that.data.reuqestNumber;
           var learnCountIcon = ["display:none", "display:none", "display:none"];
           complete_word.push(current_word);
+          if (complete_word.length === reuqestNumber) {
+            console.log("学完了");
+            that.learnComplete();
+            return false;
+          }
           current_word = waitting_word[waittingnode];
           waittingnode++;
           // 更换单词选项
@@ -324,13 +395,6 @@ Page({
     });
   },
 
-  // 点击选项
-  getOption: function (e) {
-    var that = this;
-    that.setData({
-      hideFlag: true,
-    });
-  },
   //取消
   mCancel: function () {
     var that = this;

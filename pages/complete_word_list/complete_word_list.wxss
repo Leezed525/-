@@ -1,0 +1,304 @@
+.bodystyle {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
+
+.weui-search-bar {
+  position: relative;
+  padding: 8px 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  box-sizing: border-box;
+  background-color: #efeff4;
+  border-top: 1rpx solid #d7d6dc;
+  border-bottom: 1rpx solid #d7d6dc;
+}
+.weui-icon-search_in-box {
+  position: absolute;
+  left: 10px;
+  top: 7px;
+}
+.weui-search-bar__form {
+  position: relative;
+  -webkit-box-flex: 1;
+  -webkit-flex: auto;
+  flex: auto;
+  border-radius: 5px;
+  background: #ffffff;
+  border: 1rpx solid #e6e6ea;
+}
+.weui-search-bar__box {
+  position: relative;
+  padding-left: 30px;
+  padding-right: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1;
+}
+.weui-search-bar__input {
+  height: 28px;
+  line-height: 28px;
+  font-size: 14px;
+}
+.weui-search-bar__cancel-btn {
+  margin-left: 10px;
+  line-height: 28px;
+  color: #09bb07;
+  white-space: nowrap;
+}
+
+.header {
+  width: 100%;
+  background-color: #efeff4;
+  height: 80rpx;
+  /* border-top: 1px solid #000;
+  border-bottom: 1px solid #000; */
+}
+
+.header text {
+  line-height: 80rpx;
+  float: right;
+  font-size: 30rpx;
+}
+
+.wordlist {
+  width: 100%;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+
+.worditem {
+  width: 100%;
+  height: 100rpx;
+  background-color: #fff;
+  border: 1px solid #000;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+  border-radius: 10rpx;
+  margin-top: 10rpx;
+}
+
+.word-info {
+  float: left;
+  width: 40%;
+}
+
+.word-info-main {
+  font-size: 50rpx;
+}
+
+.operations {
+  float: right;
+  height: 100%;
+  width: 60%;
+}
+
+.operation-item {
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 40%;
+  float: right;
+  margin-left: 30rpx;
+}
+
+.operation-btn {
+  width: 100%;
+  height: 80%;
+
+  justify-content: center;
+  align-items: center;
+}
+.operation-btn text {
+  line-height: 80rpx;
+  font-size: 25rpx;
+}
+
+.operation-btn span {
+  font-size: 25rpx;
+}
+
+/* 上拉框 */
+.arrow {
+  display: inline-block;
+  border: 6px solid transparent;
+  border-top-color: #000;
+  margin-left: 8px;
+  position: relative;
+  top: 6rpx;
+}
+/* ---------------------------- */
+/*模态框*/
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+}
+.modal-cancel {
+  position: absolute;
+  z-index: 2000;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+.bottom-dialog-body {
+  height: 66%;
+  width: 100%;
+  position: absolute;
+  z-index: 3000;
+  bottom: 0;
+  left: 0;
+  background: #dfdede;
+}
+/*动画前初始位置*/
+.bottom-positon {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+/* 底部弹出框 */
+.bottom-positon {
+  text-align: center;
+}
+.Mselect {
+  /* height: 56%; */
+  margin-bottom: 20rpx;
+}
+.Mselect view {
+  padding: 26rpx 0;
+  background: #fff;
+}
+.Mselect view > button {
+  display: inline-block;
+}
+
+.Mselect view:not(:last-of-type) {
+  border-bottom: 1px solid #dfdede;
+}
+.Mcancel {
+  height: 10%;
+  background: #fff;
+  padding: 26rpx 0;
+}
+
+.word-text {
+  align-items: center;
+  height: 180rpx;
+  text-align: center;
+}
+
+.word-text > text {
+  font-size: 100rpx;
+}
+
+/* 上拉框 */
+.arrow {
+  display: inline-block;
+  border: 6px solid transparent;
+  border-top-color: #000;
+  margin-left: 8px;
+  position: relative;
+  top: 6rpx;
+}
+/* ---------------------------- */
+/*模态框*/
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+}
+.modal-cancel {
+  position: absolute;
+  z-index: 2000;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+.bottom-dialog-body {
+  height: 66%;
+  width: 100%;
+  position: absolute;
+  z-index: 3000;
+  bottom: 0;
+  left: 0;
+  background: #dfdede;
+}
+/*动画前初始位置*/
+.bottom-positon {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+}
+
+/* 底部弹出框 */
+.bottom-positon {
+  text-align: center;
+}
+.Mselect {
+  /* height: 56%; */
+  margin-bottom: 20rpx;
+}
+.Mselect view {
+  padding: 26rpx 0;
+  background: #fff;
+}
+.Mselect view > button {
+  display: inline-block;
+}
+
+.Mselect view:not(:last-of-type) {
+  border-bottom: 1px solid #dfdede;
+}
+.Mcancel {
+  height: 10%;
+  background: #fff;
+  padding: 26rpx 0;
+}
+
+.soundBtn {
+  display: flex;
+  padding: 0;
+  background-color: transparent;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 25rpx;
+}
+
+.soundBtn span {
+  font-size: 25rpx;
+}
+
+.soundBtn text {
+  font-size: 25rpx;
+}
+
+.soundBtn::after {
+  border: none;
+}
+.liju {
+  font-size: 50rpx;
+}
+
+.tran {
+  font-size: medium;
+}
