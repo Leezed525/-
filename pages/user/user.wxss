@@ -69,3 +69,14 @@
 .opt-child span {
   font-size: 20px;
 }
+
+.shareBtn {
+  height: 100%;
+  text-align: left;
+  background-color: #fff;
+  padding: 0;
+}
+
+.shareBtn::after {
+  border: none;
+}

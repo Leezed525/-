@@ -3,7 +3,7 @@ const cloud = require("wx-server-sdk");
 cloud.init();
 var rp = require("request-promise");
 
-var URLhead = "http://localhost:8080/";
+var URLhead = "http://139.198.171.181:8080/";
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext();

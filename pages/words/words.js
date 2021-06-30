@@ -70,6 +70,17 @@ Page({
    */
   onShareAppMessage: function () {},
 
+  //还未开发的设置功能
+  setting: function () {
+    wx.showModal({
+      title: "SORRY",
+      content: "该功能开发中,敬请期待",
+      showCancel: false,
+      confirmText: "确定",
+      confirmColor: "#3CC51F",
+    });
+  },
+
   // 点击音标播放声音
   symbol_play: function () {
     const innerAudioContext = wx.createInnerAudioContext();
@@ -87,6 +98,7 @@ Page({
     });
     innerAudioContext.play();
   },
+  //播放例句
   playex() {
     const innerAudioContext = wx.createInnerAudioContext();
     var url =
@@ -411,7 +423,7 @@ Page({
     });
     // 创建动画实例
     var animation = wx.createAnimation({
-      duration: 400, //动画的持续时间
+      duration: 300, //动画的持续时间
       timingFunction: "ease", //动画的效果 默认值是linear->匀速，ease->动画以低速开始，然后加快，在结束前变慢
     });
     this.animation = animation; //将animation变量赋值给当前动画

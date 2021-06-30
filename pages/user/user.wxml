@@ -23,8 +23,10 @@
   </view>
   <view class="container">
     <navigator class="opt-child">
-      <span class="iconfont icon-fenxiang"></span>
-      分享
+      <button open-type='share' class="shareBtn">
+        <span class="iconfont icon-fenxiang"></span>
+        分享
+      </button>
     </navigator>
     <navigator class="opt-child" url="../feedback/feedback">
       <span class="iconfont icon-bug"></span>

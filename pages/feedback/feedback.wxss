@@ -59,4 +59,10 @@ button {
   left: 50rpx;
   background-color: #fa644c;
   color: #fff;
+  width: 650rpx;
+  height: 100rpx;
+  font-size: 36rpx;
+  line-height: 70rpx;
+  font-weight: 400;
+  border-radius: 20rpx;
 }

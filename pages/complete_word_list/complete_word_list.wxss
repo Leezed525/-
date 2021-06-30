@@ -203,7 +203,7 @@
 }
 
 .word-text > text {
-  font-size: 100rpx;
+  font-size: 80rpx;
 }
 
 /* 上拉框 */

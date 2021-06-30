@@ -88,7 +88,7 @@ Page({
     // var vocabId = "您的用户词表ID";
     // var sign = CryptoJS.SHA256(str1).toString();
     // wx.request({
-    //   url: "http://openapi.youdao.com/api",
+    //   url: "https://openapi.youdao.com/api",
     //   type: "post",
     //   header: { "content-type": "application/x-www-form-urlencoded" },
     //   dataType: "jsonp",

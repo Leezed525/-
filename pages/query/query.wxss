@@ -1,1 +1,4 @@
-/* pages/query/query.wxss */
+view {
+  text-align: center;
+  font-size: 50rpx;
+}

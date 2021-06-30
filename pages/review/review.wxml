@@ -6,29 +6,70 @@
         <view class="word">
             <view class="main">
                 <view class="word-text">
-                    <input type="text"></input>
+                    <view class="input-view" hover-class="none" hover-stop-propagation="false">
+                        <input type="text" class="word-input {{inputRightFlag?'':'error'}}" bindinput="changeTestWord" value="{{inputValue}}"></input>
+                    </view>
                     <button class="soundBtn" bindtap='symbol_play'>
                         <span class="iconfont icon-sound"></span>
-                        <text>{{current_word.symbols}}</text>
+                        <text class="info-symbols">{{current_word.symbols}}</text>
                     </button>
                 </view>
             </view>
         </view>
-        <view class="answer"></view>
+        <view class="answer">
+            <button class="submitBtn" bindtap="submitTestWord">
+                <span class="iconfont icon-wancheng"></span>
+                <text class="">提交</text>
+            </button>
+        </view>
     </view>
     <view class="footer">
         <view class="operations">
             <view class="operation-item back">
                 <!-- 设置按钮 -->
-                <button size="mini" class="setBtn">
+                <button size="mini" class="setBtn" bindtap="setting">
                     <span class="iconfont icon-Settingscontroloptions"></span>
                 </button>
             </view>
-            <view class="operation-item delete">
-                <!-- 已掌握 -->
-                <button size="mini" class="deleteBtn" bindtap="nextWord">
-                    <span class="iconfont icon-right"></span>
+            <view class="operation-item delete" style="{{rightFlag? '':'display:none'}}">
+                <!-- 下拉框滑出 -->
+                <button size="mini" class="deleteBtn" bindtap="showModal">
+                    <span class="iconfont icon-direction-up"></span>
                 </button>
+            </view>
+        </view>
+    </view>
+    <!-- 上拉框 -->
+    <view class="modal modal-bottom-dialog" hidden="{{hideFlag}}">
+        <view class="modal-cancel" bindtap="hideModal"></view>
+        <view class="bottom-dialog-body bottom-positon" animation="{{animationData}}">
+            <!--  -->
+            <view class="word-text">
+                <text>{{current_word.word}}</text>
+                <button class="soundBtn" bindtap='symbol_play'>
+                    <span class="iconfont icon-sound"></span>
+                    <text>{{current_word.symbols}}</text>
+                </button>
+            </view>
+            <view class="Mselect">
+                <view>
+                    <text>例  句\n</text>
+                    <button size="mini" class="soundBtn" bindtap="playex">
+                        <span class="iconfont icon-sound"></span>
+                    </button>
+                    <view class="liju">
+                        <text>{{current_word.ex}}</text>
+                        <text class="tran">\n{{current_word.tran}}</text>
+                    </view>
+                </view>
+            </view>
+            <!-- <view class='Mselect'>
+                <view wx:for="{{optionList}}" wx:key="unique" data-value='{{item}}' bindtap='getOption'>
+                    {{item}}
+                </view>
+            </view> -->
+            <view class='Mcancel' bindtap='mCancel'>
+                <text>下一单词</text>
             </view>
         </view>
     </view>

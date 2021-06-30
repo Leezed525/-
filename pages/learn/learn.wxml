@@ -20,7 +20,7 @@
             </button>
         </view>
         <view class="operation_item">
-            <button class="operation_item_btn btn">
+            <button class="operation_item_btn btn" bindtap="reviewBtn">
                 <text>review</text>
             </button>
         </view>

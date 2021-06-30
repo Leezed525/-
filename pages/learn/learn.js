@@ -13,41 +13,59 @@ Page({
   //今天签到
   SignInToday: function () {
     var that = this;
-    var userInfo = that.data.userInfo;
-    wx.showModal({
-      title: "签到确认",
-      content: "确定要签到?",
-      showCancel: true, //是否显示取消按钮
-      success: function (res) {
-        console.log(res);
-        if (res.confirm) {
-          wx.cloud.callFunction({
-            name: "request",
-            data: {
-              url: "sign/SignInToday",
+    var isLogin = that.data.isLogin;
+    if (!isLogin) {
+      wx.showModal({
+        title: "ERROR",
+        content: "您还没有登录或登录已经过期",
+        showCancel: false,
+        confirmText: "前往登录",
+        confirmColor: "#3CC51F",
+        success: (result) => {
+          if (result.confirm) {
+            wx.switchTab({
+              url: "../user/user",
+            });
+          }
+        },
+      });
+    } else {
+      var userInfo = that.data.userInfo;
+      wx.showModal({
+        title: "签到确认",
+        content: "确定要签到?",
+        showCancel: true, //是否显示取消按钮
+        success: function (res) {
+          console.log(res);
+          if (res.confirm) {
+            wx.cloud.callFunction({
+              name: "request",
               data: {
-                user_id: userInfo.id,
+                url: "sign/SignInToday",
+                data: {
+                  user_id: userInfo.id,
+                },
               },
-            },
-            success: function (res) {
-              var title;
-              var res = res.result;
-              // console.log(res);
-              title = res.msg;
-              that.setData({
-                isSignIn: true,
-              });
-              wx.showToast({
-                title: title, //提示文字
-                duration: 500, //显示时长
-                mask: true, //是否显示透明蒙层，防止触摸穿透，默认：false
-                icon: res.code == 200 ? "success" : "error", //图标，支持"success"、"loading"
-              });
-            },
-          });
-        }
-      },
-    });
+              success: function (res) {
+                var title;
+                var res = res.result;
+                // console.log(res);
+                title = res.msg;
+                that.setData({
+                  isSignIn: true,
+                });
+                wx.showToast({
+                  title: title, //提示文字
+                  duration: 500, //显示时长
+                  mask: true, //是否显示透明蒙层，防止触摸穿透，默认：false
+                  icon: res.code == 200 ? "success" : "error", //图标，支持"success"、"loading"
+                });
+              },
+            });
+          }
+        },
+      });
+    }
   },
 
   //检查今天是否签到过
@@ -146,8 +164,34 @@ Page({
     }
   },
 
+  reviewBtn: function () {
+    var that = this;
+    var isLogin = that.data.isLogin;
+    if (!isLogin) {
+      wx.showModal({
+        title: "ERROR",
+        content: "您还没有登录或登录已经过期",
+        showCancel: false,
+        confirmText: "前往登录",
+        confirmColor: "#3CC51F",
+        success: (result) => {
+          if (result.confirm) {
+            wx.switchTab({
+              url: "../user/user",
+            });
+          }
+        },
+      });
+    } else {
+      wx.navigateTo({
+        url: "../review/review",
+      });
+    }
+  },
+
   //获取每日一句
   getEveryDayNode: function () {
+    let that = this;
     var time = new Date();
     time.setTime(time.getTime());
     var year = time.getFullYear();
@@ -167,16 +211,19 @@ Page({
       "-" +
       day;
     // console.log(url);
-    var reqTask = wx.request({
-      url: url,
-      method: "GET",
-      success: (result) => {
-        console.log(result);
-        this.setData({
-          content: result.data.content,
-          note: result.data.note,
-        });
-      },
+    return new Promise(function (resolve, reject) {
+      wx.request({
+        url: url,
+        method: "GET",
+        success: (result) => {
+          console.log(result);
+          that.setData({
+            content: result.data.content,
+            note: result.data.note,
+          });
+          resolve(result);
+        },
+      });
     });
   },
 
@@ -185,7 +232,13 @@ Page({
    */
   onLoad: function (options) {
     wx.cloud.init();
-    this.getEveryDayNode();
+    wx.showLoading({
+      title: "加载中",
+      mask: true,
+    });
+    this.getEveryDayNode().then((res) => {
+      wx.hideLoading();
+    });
   },
 
   /**

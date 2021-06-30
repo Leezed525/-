@@ -1,1 +1,4 @@
-/* pages/Real_questions/Real_questions.wxss */
+view {
+  text-align: center;
+  font-size: 50rpx;
+}

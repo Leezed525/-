@@ -51,7 +51,7 @@
         <view class="operations">
             <view class="operation-item back">
                 <!-- 设置按钮 -->
-                <button size="mini" class="setBtn">
+                <button size="mini" class="setBtn" bindtap="setting">
                     <span class="iconfont icon-Settingscontroloptions"></span>
                 </button>
             </view>

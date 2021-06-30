@@ -1,2 +1,4 @@
 <!-- pages/Real_questions/Real_questions.wxml -->
-<web-view src="http://cet4-6.xdf.cn/201711/10727762.html" bindmessage=""></web-view>
+<!-- <web-view src="http://cet4-6.xdf.cn/201711/10727762.html" bindmessage=""></web-view> -->
+<view>请复制链接打开浏览器进行刷真题
+https://www.chsi.com.cn/cet/</view>
